@@ -21,7 +21,7 @@ services:
       - you-network
 
   db:
-    image: postgres:15
+    image: postgres
     environment:
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USER}
@@ -32,7 +32,14 @@ services:
       - db-data:/var/lib/postgresql/data
     networks:
       - you-network
-
+  composer:
+    image: composer:latest
+    volumes:
+      - ./:/app
+    networks:
+      - you-network
+    depends_on:
+      - app
 networks:
   you-network:
     driver: bridge
