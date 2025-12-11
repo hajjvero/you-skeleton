@@ -3,6 +3,7 @@
 .env
 .env.local
 .ds_store
+composer.lock
 /public/build/
 /var/
 /cache/

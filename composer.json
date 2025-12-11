@@ -18,6 +18,8 @@
     }
   ],
   "require": {
-    "php": ">=8.4"
+    "php": ">=8.4",
+    "dotenv-org/phpdotenv-vault": "^0.2.4",
+    "hajjvero/you-framework": "^1.0"
   }
 }
