@@ -1,0 +1,23 @@
+{
+  "name": "you-skeleton/project",
+  "type": "project",
+  "description": "Squelette de projet PHP YouSkeleton",
+  "license": "MIT",
+  "homepage": "https://github.com/hajjvero/you-skeleton.git",
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Hamza Hajjaji",
+      "email": "hajjvero@gmail.com",
+      "homepage": "https://github.com/hajjvero",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=8.4"
+  }
+}

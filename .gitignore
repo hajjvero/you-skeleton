@@ -1,0 +1,14 @@
+/vendor/
+/node_modules/
+.env
+.env.local
+.ds_store
+/public/build/
+/var/
+/cache/
+/log/
+phpunit.xml
+.phpunit.result.cache
+.idea/
+.vscode/
+*.swp
