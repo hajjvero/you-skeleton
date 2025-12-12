@@ -1,0 +1,91 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * Point d'entrée CLI de l'application You Framework
+ * 
+ * Ce fichier sert de point d'entrée pour toutes les commandes en ligne de commande
+ * de l'application. Il initialise l'environnement d'exécution, charge les dépendances
+ * nécessaires et démarre l'application en mode console.
+ * 
+ * Utilisation:
+ *   php you <commande> [options] [arguments]
+ * 
+ * Exemples:
+ *   php you list                    # Affiche toutes les commandes disponibles
+ *   php you serve                   # Démarre le serveur de développement
+ *   php you route:list              # Affiche toutes les routes enregistrées
+ *   php you make:controller Home    # Crée un nouveau contrôleur
+ * 
+ * Prérequis:
+ *   - PHP 8.0 ou supérieur
+ *   - Composer installé
+ *   - Dépendances installées via `composer install`
+ * 
+ * Architecture:
+ *   1. Vérification de l'autoloader Composer
+ *   2. Chargement de l'autoloader
+ *   3. Vérification du fichier de bootstrap console
+ *   4. Initialisation de l'application
+ *   5. Exécution de la commande console
+ * 
+ * @package    YouSkeleton
+ * @author     You Framework Team
+ * @copyright  2025 You Framework
+ * @license    MIT License
+ * @version    1.0.0
+ * @link       https://github.com/hajjvero/you-skeleton
+ * 
+ * @see        YouKernel\Application Pour la classe principale de l'application
+ * @see        bootstrap/console.php Pour la configuration de l'application console
+ */
+
+declare(strict_types=1);
+
+use YouKernel\Application;
+
+/*
+|--------------------------------------------------------------------------
+| Vérification de l'autoloader
+|--------------------------------------------------------------------------
+|
+| On vérifie que les dépendances ont bien été installées via Composer.
+| Si ce n'est pas le cas, on arrête l'exécution avec un message d'erreur.
+|
+*/
+
+if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
+    die('Veuillez installer les dépendances du projet via la commande `composer install`.');
+}
+
+// Chargement de l'autoloader de Composer
+require_once __DIR__ . '/vendor/autoload.php';
+
+/*
+|--------------------------------------------------------------------------
+| Démarrage de l'application
+|--------------------------------------------------------------------------
+|
+| On récupère l'instance de l'application déjà configurée depuis le fichier
+| de bootstrap. Cette instance est prête à recevoir la requête.
+|
+*/
+
+if (!file_exists(__DIR__ . '/bootstrap/console.php')) {
+    die('Veuillez configurer l\'application via le fichier `bootstrap/console.php`.');
+}
+
+/** @var Application $app */
+$app = require __DIR__ . '/bootstrap/console.php';
+
+/*
+|--------------------------------------------------------------------------
+| Exécution de la commande
+|--------------------------------------------------------------------------
+|
+| On lance le traitement de la commande CLI. L'application va analyser
+| la requête, la router vers le bon contrôleur et renvoyer la réponse.
+|
+*/
+
+$app->runConsole();
