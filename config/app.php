@@ -18,5 +18,8 @@ return [
     ],
     'commands' => [
         'resource' => '/src/Command'
+    ],
+    'twig' => [
+        'path' => '/templates'
     ]
 ];

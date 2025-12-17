@@ -8,21 +8,25 @@
  * de l'application. Il initialise l'environnement d'exécution, charge les dépendances
  * nécessaires et démarre l'application en mode console.
  * 
- * Utilisation:
- *   php you <commande> [options] [arguments]
+ * ## Utilisation
  * 
- * Exemples:
- *   php you list                    # Affiche toutes les commandes disponibles
- *   php you serve                   # Démarre le serveur de développement
- *   php you route:list              # Affiche toutes les routes enregistrées
- *   php you make:controller Home    # Crée un nouveau contrôleur
+ *     php you <commande> [options] [arguments]
  * 
- * Prérequis:
+ * ## Exemples
+ * 
+ *     php you list                    # Affiche toutes les commandes disponibles
+ *     php you serve                   # Démarre le serveur de développement
+ *     php you route:list              # Affiche toutes les routes enregistrées
+ *     php you make:controller Home    # Crée un nouveau contrôleur
+ * 
+ * ## Prérequis
+ * 
  *   - PHP 8.0 ou supérieur
  *   - Composer installé
  *   - Dépendances installées via `composer install`
  * 
- * Architecture:
+ * ## Architecture
+ * 
  *   1. Vérification de l'autoloader Composer
  *   2. Chargement de l'autoloader
  *   3. Vérification du fichier de bootstrap console
@@ -30,14 +34,13 @@
  *   5. Exécution de la commande console
  * 
  * @package    YouSkeleton
- * @author     You Framework Team
+ * @author     Équipe You Framework
  * @copyright  2025 You Framework
  * @license    MIT License
- * @version    1.0.0
  * @link       https://github.com/hajjvero/you-skeleton
+ * @author  Hamza Hajjaji <https://github.com/hajjvero>
  * 
- * @see        YouKernel\Application Pour la classe principale de l'application
- * @see        bootstrap/console.php Pour la configuration de l'application console
+ * @see        \YouKernel\Application Pour la classe principale de l'application
  */
 
 declare(strict_types=1);
@@ -46,37 +49,19 @@ use YouKernel\Application;
 
 /*
 |--------------------------------------------------------------------------
-| Vérification de l'autoloader
-|--------------------------------------------------------------------------
-|
-| On vérifie que les dépendances ont bien été installées via Composer.
-| Si ce n'est pas le cas, on arrête l'exécution avec un message d'erreur.
-|
-*/
-
-if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
-    die('Veuillez installer les dépendances du projet via la commande `composer install`.');
-}
-
-// Chargement de l'autoloader de Composer
-require_once __DIR__ . '/vendor/autoload.php';
-
-/*
-|--------------------------------------------------------------------------
 | Démarrage de l'application
 |--------------------------------------------------------------------------
 |
 | On récupère l'instance de l'application déjà configurée depuis le fichier
-| de bootstrap. Cette instance est prête à recevoir la requête.
-|
+| de bootstrap. Cette instance est prête à être utilisée pour lancer les commandes.
 */
 
-if (!file_exists(__DIR__ . '/bootstrap/console.php')) {
-    die('Veuillez configurer l\'application via le fichier `bootstrap/console.php`.');
+if(!file_exists(__DIR__ . '/bootstrap/app.php')) {
+    die('Veuillez configurer l\'application via le fichier `bootstrap/app.php`.');
 }
 
 /** @var Application $app */
-$app = require __DIR__ . '/bootstrap/console.php';
+$app = require __DIR__ . '/bootstrap/app.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -88,4 +73,4 @@ $app = require __DIR__ . '/bootstrap/console.php';
 |
 */
 
-$app->runConsole();
+$app->runConsole($argv);

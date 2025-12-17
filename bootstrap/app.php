@@ -17,6 +17,23 @@ use YouKernel\Application;
 
 /*
 |--------------------------------------------------------------------------
+| Vérification de l'autoloader
+|--------------------------------------------------------------------------
+|
+| On vérifie que les dépendances ont bien été installées via Composer.
+| Si ce n'est pas le cas, on arrête l'exécution avec un message d'erreur.
+|
+*/
+
+if (!file_exists(dirname(__DIR__) . '/vendor/autoload.php')) {
+    die('Veuillez installer les dépendances du projet via la commande `composer install`.');
+}
+
+// Chargement de l'autoloader de Composer
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+/*
+|--------------------------------------------------------------------------
 | Création de l'instance de l'Application
 |--------------------------------------------------------------------------
 |
@@ -29,9 +46,7 @@ use YouKernel\Application;
 try {
     // Instanciation de l'application avec le chemin racine du projet
     // Retourne l'instance de l'application au script appelant (ex: public/index.php ou you)
-    return new Application(dirname(__DIR__))
-        ->bootHttp()
-        ;
+    return new Application(dirname(__DIR__));
 
 } catch (ReflectionException $e) {
     // Gestion des erreurs critiques lors de l'initialisation (ex: problèmes d'injection de dépendances)
