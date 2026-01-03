@@ -20,7 +20,8 @@
   "require": {
     "php": ">=8.4",
     "dotenv-org/phpdotenv-vault": "^0.2.4",
-    "hajjvero/you-framework": "^1"
+    "hajjvero/you-framework": "^1",
+    "ext-pdo": "*"
   },
   "require-dev": {
     "symfony/var-dumper": "^8.0"
